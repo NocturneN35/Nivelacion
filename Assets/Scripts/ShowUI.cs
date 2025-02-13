@@ -4,26 +4,26 @@ using UnityEngine;
 
 public class ShowUI : MonoBehaviour
 {
-    public GameObject uiObject; // Reference to the UI GameObject
+    public GameObject uiObject; 
 
     void Start()
     {
-        uiObject.SetActive(false); // Initially hide the UI
+        uiObject.SetActive(false); 
     }
 
     void OnTriggerEnter(Collider player)
     {
-        if (player.gameObject.CompareTag("Player")) // Check if the player has entered the trigger zone
+        if (player.gameObject.CompareTag("Player")) 
         {
-            uiObject.SetActive(true); // Show the UI
-            StartCoroutine(WaitForSec()); // Start the coroutine to wait for 5 seconds
+            uiObject.SetActive(true); 
+            StartCoroutine(WaitForSec()); 
         }
     }
 
     IEnumerator WaitForSec()
     {
         yield return new WaitForSeconds(300);
-        Destroy(uiObject); // Destroy the UI object
-        Destroy(gameObject); // Optionally destroy this object (the trigger zone)
+        Destroy(uiObject); 
+        Destroy(gameObject); 
     }
 }

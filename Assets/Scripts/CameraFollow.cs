@@ -10,7 +10,7 @@ public class SmoothCameraFollow : MonoBehaviour
 
     private void Awake()
     {
-        // Initialize the offset to maintain the initial position difference between the camera and the target
+       
         if (target != null)
         {
             offset = transform.position - target.position;
@@ -21,10 +21,10 @@ public class SmoothCameraFollow : MonoBehaviour
     {
         if (target != null)
         {
-            // Calculate the target position using the offset
+            
             Vector3 targetPosition = target.position + offset;
 
-            // Smoothly move the camera to the target position
+            
             transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref currentVelocity, smoothTime);
         }
     }
