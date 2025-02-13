@@ -16,22 +16,19 @@ public class MazeGenerator : MonoBehaviour
 
     private MazeCell[,] _mazeGrid;
 
-    // Reference to the GoalManager (to place the goal)
     [SerializeField]
     private GoalManager _goalManager;
 
     void Start()
     {
-        // Check if _goalManager is assigned
         if (_goalManager == null)
         {
             Debug.LogError("GoalManager is not assigned in the MazeGenerator inspector!");
-            return; // Early exit if _goalManager is not assigned
+            return;
         }
 
         _mazeGrid = new MazeCell[_mazeWidth, _mazeDepth];
 
-        // Instantiate maze cells
         for (int x = 0; x < _mazeWidth; x++)
         {
             for (int z = 0; z < _mazeDepth; z++)
@@ -40,13 +37,10 @@ public class MazeGenerator : MonoBehaviour
             }
         }
 
-        // Generate the maze
         GenerateMaze(null, _mazeGrid[0, 0]);
 
-        // Create the exit (same as before)
         CreateExit();
 
-        // Tell GoalManager to place the goal outside the maze
         _goalManager.PlaceGoal(_mazeGrid[_mazeWidth - 1, Random.Range(0, _mazeDepth)].transform.position, _mazeWidth);
     }
 
@@ -157,10 +151,9 @@ public class MazeGenerator : MonoBehaviour
         }
     }
 
-    // Method to create the exit by knocking down a wall on the edge of the maze
     private void CreateExit()
     {
         MazeCell exitCell = _mazeGrid[_mazeWidth - 1, Random.Range(0, _mazeDepth)];
-        exitCell.ClearRightWall();  // Knock down the wall on the right side of the exit cell
+        exitCell.ClearRightWall();
     }
 }
